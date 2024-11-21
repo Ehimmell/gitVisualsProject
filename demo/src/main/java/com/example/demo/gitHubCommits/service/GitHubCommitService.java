@@ -17,25 +17,21 @@ public class GitHubCommitService {
     // The client for the request
     private final OkHttpClient client;
 
-    // The Gson object for the request
-    private final Gson gson;
-
     /* *** Constructor *** */
 
     public GitHubCommitService(GitHubProperties gitHubProperties) {
         this.gitHubProperties = gitHubProperties;
         this.client = new OkHttpClient();
-        this.gson = new Gson();
     }
 
     /* *** Main Method *** */
-    public List<String> getAllCommits(String owner, String repo) throws IOException {
+    public List<Set<String>> getAllCommits(String owner, String repo) throws IOException {
 
         //Set the username and owner and the default gitHubProperties initialized above
         gitHubProperties.setUsername(owner);
         gitHubProperties.setRepoName(repo);
 
-        //Make and fomrat the template for the request url
+        //Make and format the template for the request url
         String template = "https://api.github.com/repos/%s/%s/commits";
         String full = String.format(template, gitHubProperties.getUsername(), gitHubProperties.getRepoName());
 
@@ -61,6 +57,48 @@ public class GitHubCommitService {
         String[] commits = response.body().string().split("\"message\":");
 
         //Return the list of commits, minus the first one, as it is metadata on the sha and node
-        return new ArrayList<>(Arrays.asList(commits).subList(1, commits.length));
+        return formatCommits(new ArrayList<>(Arrays.asList(commits).subList(1, commits.length)));
+    }
+
+    public List<Set<String>> formatCommits(List<String> commits) {
+
+        //Create a list of sets that will contain the desired data for each commit given in the input
+        List<Set<String>> commitsMeta = new ArrayList<>();
+
+        //Create a list of the desired metadata to look for in each commit
+        List<String> desiredMetadata = new ArrayList<>();
+        desiredMetadata.add("url\":");
+        desiredMetadata.add("author\":");
+
+        //Parse each commit
+        for (String commit : commits) {
+
+            //Split on commas to separate the metadata
+            String[] commitSplit = commit.split(",");
+
+            //Create a set to hold metadata meeting desired criteria
+            Set<String> commitMeta = new HashSet<>();
+
+            //Add the first piece as it is the commit message
+            commitMeta.add(commitSplit[0]);
+
+            //Parse over every other piece of metadata
+            for (String metadataQuery : desiredMetadata) {
+                //Parse over the format for every piece of desired metadata
+                for (int j = 1; j < commitSplit.length; j++) {
+                    /*If a piece of metadata is formatted in a way the matches a piece of desired metadata,
+                    add it to the list. Also check to see if it contains _url as _url denotes an unwanted
+                    supplementary url.*/
+                    if (commitSplit[j].contains(metadataQuery) && !commitSplit[j].contains("_url")) {
+                        commitMeta.add(commitSplit[j]);
+                    }
+                }
+            }
+            //Add the complete list of desired metadata
+            commitsMeta.add(commitMeta);
+        }
+
+        //Return the list of desired metadata for each commit
+        return commitsMeta;
     }
 }
