@@ -23,11 +23,11 @@ public class CommitController {
     }
 
     @GetMapping("/commits")
-    public ResponseEntity<List<List<Set<String>>>> getCommitMessages(
+    public ResponseEntity<List<List<List<Set<String>>>>> getCommitMessages(
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            List<Set<String>> commits = gitHubCommitService.getAllCommits(owner, repo);
+            List<List<Set<String>>> commits = gitHubCommitService.getAllCommits(owner, repo);
             return ResponseEntity.ok(Collections.singletonList(commits));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
