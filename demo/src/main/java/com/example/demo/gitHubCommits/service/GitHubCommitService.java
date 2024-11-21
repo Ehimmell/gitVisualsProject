@@ -3,6 +3,7 @@ package com.example.demo.gitHubCommits.service;
 import com.example.demo.gitHubCommits.config.GitHubProperties;
 import com.google.gson.Gson;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -60,8 +61,8 @@ public class GitHubCommitService {
         return formatCommits(new ArrayList<>(Arrays.asList(commits).subList(1, commits.length)));
     }
 
-    public List<Set<String>> formatCommits(List<String> commits) {
-
+    private static @NotNull List<Set<String>> formatCommits(List<String> commits) {
+        
         //Create a list of sets that will contain the desired data for each commit given in the input
         List<Set<String>> commitsMeta = new ArrayList<>();
 
@@ -72,33 +73,38 @@ public class GitHubCommitService {
 
         //Parse each commit
         for (String commit : commits) {
-
+            
             //Split on commas to separate the metadata
             String[] commitSplit = commit.split(",");
-
+            
             //Create a set to hold metadata meeting desired criteria
-            Set<String> commitMeta = new HashSet<>();
-
-            //Add the first piece as it is the commit message
-            commitMeta.add(commitSplit[0]);
-
-            //Parse over every other piece of metadata
-            for (String metadataQuery : desiredMetadata) {
-                //Parse over the format for every piece of desired metadata
-                for (int j = 1; j < commitSplit.length; j++) {
-                    /*If a piece of metadata is formatted in a way the matches a piece of desired metadata,
-                    add it to the list. Also check to see if it contains _url as _url denotes an unwanted
-                    supplementary url.*/
-                    if (commitSplit[j].contains(metadataQuery) && !commitSplit[j].contains("_url")) {
-                        commitMeta.add(commitSplit[j]);
-                    }
-                }
-            }
+            Set<String> commitMeta = getStrings(commitSplit, desiredMetadata);
             //Add the complete list of desired metadata
             commitsMeta.add(commitMeta);
         }
-
+        
         //Return the list of desired metadata for each commit
         return commitsMeta;
+    }
+
+    private static @NotNull Set<String> getStrings(String[] commitSplit, List<String> desiredMetadata) {
+        Set<String> commitMeta = new HashSet<>();
+
+        //Add the first piece as it is the commit message
+        commitMeta.add(commitSplit[0]);
+
+        //Parse over every other piece of metadata
+        for (String metadataQuery : desiredMetadata) {
+            //Parse over the format for every piece of desired metadata
+            for (int j = 1; j < commitSplit.length; j++) {
+                /*If a piece of metadata is formatted in a way the matches a piece of desired metadata,
+                add it to the list. Also check to see if it contains _url as _url denotes an unwanted
+                supplementary url.*/
+                if (commitSplit[j].contains(metadataQuery) && !commitSplit[j].contains("_url")) {
+                    commitMeta.add(commitSplit[j]);
+                }
+            }
+        }
+        return commitMeta;
     }
 }
