@@ -1,7 +1,6 @@
 package com.example.demo.gitHubCommits.service;
 
 import com.example.demo.gitHubCommits.config.GitHubProperties;
-import com.google.gson.Gson;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
