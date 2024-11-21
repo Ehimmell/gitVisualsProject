@@ -62,7 +62,16 @@ public class GitHubCommitService {
 
     //Method to format each commit by its categories of metadata
     private static @NotNull List<List<Set<String>>> formatCommits(List<String> commits) {
-        
+        /*
+        In every commit, there exists tons of metadata. Some of the metadata are simple, like the commit
+        message or the author. Others are more complex, like the sha, node, or other. Less than a third
+        of what is returned is actually needed right now. The goal of this method and its helper methods
+        is to parse through each commit, divide it into pieces of metadata(separated by commas), and
+        identify what pieces of metadata we want by identifying what pieces follow formats shared by
+        desired types. For example, the author is a desired type, and is denoted by "author\":". For
+        each of these types there is a list, and in each list is every unique piece of data following
+        the type's format.
+         */
         //Create a list of sets that will contain the desired data for each commit given in the input
         List<List<Set<String>>> commitsMeta = new ArrayList<>();
 
