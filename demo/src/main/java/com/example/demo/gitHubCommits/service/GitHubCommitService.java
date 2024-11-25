@@ -72,6 +72,7 @@ public class GitHubCommitService {
         each of these types there is a list, and in each list is every unique piece of data following
         the type's format.
          */
+
         //Create a list of sets that will contain the desired data for each commit given in the input
         List<List<Set<String>>> commitsMeta = new ArrayList<>();
 
@@ -112,6 +113,7 @@ public class GitHubCommitService {
         desiredMetadata.add("url\":");
         desiredMetadata.add("author\":");
         desiredMetadata.add("commit\":");
+        desiredMetadata.add("sha\":");
 
         //Parse over each piece of desired metadata
         for (String desiredMeta : desiredMetadata) {
