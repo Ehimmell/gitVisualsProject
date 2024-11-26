@@ -1,24 +1,13 @@
 package com.example.demo.gitHubCommits.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Tree {
 
+    @Setter
     private String sha;
 
+    @Setter
     private String url;
-
-    public void setSha(String sha) {
-        this.sha = sha;
-    }
-
-    public String getSha() {
-        return sha;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
 }

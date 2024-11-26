@@ -3,17 +3,13 @@ package com.example.demo.gitHubCommits.model;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Author {
+public class BranchCommit {
 
     @Getter
     @Setter
-    private String name;
+    private String sha;
 
     @Getter
     @Setter
-    private String email;
-
-    @Getter
-    @Setter
-    private String date;
+    private String url;
 }

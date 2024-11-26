@@ -1,7 +1,7 @@
 package com.example.demo.gitHubCommits.controller;
 
-import com.example.demo.gitHubCommits.model.Commit;
-import com.example.demo.gitHubCommits.service.GitHubCommitService;
+import com.example.demo.gitHubCommits.model.CommitsListCommit;
+import com.example.demo.gitHubCommits.service.GitHubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +13,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class CommitController {
+public class CommitsController {
 
-    private final GitHubCommitService gitHubCommitService;
+    private final GitHubService gitHubCommitService;
 
     @Autowired
-    public CommitController(GitHubCommitService service) {
+    public CommitsController(GitHubService service) {
         this.gitHubCommitService = service;
     }
 
     @GetMapping("/commits")
-    public ResponseEntity<List<Commit[]>> getCommitMessages(
+    public ResponseEntity<List<CommitsListCommit[]>> getCommits(
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            Commit[] commits = gitHubCommitService.getAllCommits(owner, repo);
+            CommitsListCommit[] commits = gitHubCommitService.getAllCommits(owner, repo);
             return ResponseEntity.ok(Collections.singletonList(commits));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
