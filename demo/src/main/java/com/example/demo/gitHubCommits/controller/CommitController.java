@@ -1,5 +1,6 @@
 package com.example.demo.gitHubCommits.controller;
 
+import com.example.demo.gitHubCommits.model.Commit;
 import com.example.demo.gitHubCommits.service.GitHubCommitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -23,11 +23,11 @@ public class CommitController {
     }
 
     @GetMapping("/commits")
-    public ResponseEntity<List<List<List<Set<String>>>>> getCommitMessages(
+    public ResponseEntity<List<Commit[]>> getCommitMessages(
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            List<List<Set<String>>> commits = gitHubCommitService.getAllCommits(owner, repo);
+            Commit[] commits = gitHubCommitService.getAllCommits(owner, repo);
             return ResponseEntity.ok(Collections.singletonList(commits));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
