@@ -15,11 +15,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class CommitsController {
 
-    private final GitHubMultiService gitHubCommitService;
+    private final GitHubMultiService gitHubCommitsService;
 
     @Autowired
     public CommitsController(GitHubMultiService service) {
-        this.gitHubCommitService = service;
+        this.gitHubCommitsService = service;
     }
 
     @GetMapping("/commits")
@@ -27,7 +27,7 @@ public class CommitsController {
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            CommitsListCommit[] commits = gitHubCommitService.getAllCommits(owner, repo);
+            CommitsListCommit[] commits = gitHubCommitsService.getAllCommits(owner, repo);
             return ResponseEntity.ok(Collections.singletonList(commits));
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

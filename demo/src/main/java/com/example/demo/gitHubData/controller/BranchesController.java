@@ -13,11 +13,11 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class BranchesController {
 
-    private final GitHubMultiService gitHubCommitService;
+    private final GitHubMultiService gitHubBranchesService;
 
     @Autowired
     public BranchesController(GitHubMultiService service) {
-        this.gitHubCommitService = service;
+        this.gitHubBranchesService = service;
     }
 
     @GetMapping("/branches")
@@ -25,7 +25,7 @@ public class BranchesController {
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            BranchesListBranch[] branches = gitHubCommitService.getAllBranches(owner, repo);
+            BranchesListBranch[] branches = gitHubBranchesService.getAllBranches(owner, repo);
             return ResponseEntity.ok(branches);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
