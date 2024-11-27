@@ -1,8 +1,8 @@
-package com.example.demo.gitHubCommits.service;
+package com.example.demo.gitHubData.service;
 
-import com.example.demo.gitHubCommits.config.GitHubProperties;
-import com.example.demo.gitHubCommits.model.BranchesListBranch;
-import com.example.demo.gitHubCommits.model.CommitsListCommit;
+import com.example.demo.gitHubData.config.GitHubProperties;
+import com.example.demo.gitHubData.model.BranchesListBranch;
+import com.example.demo.gitHubData.model.CommitsListCommit;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 @Service
-public class GitHubService {
+public class GitHubMultiService {
 
     // Properties for the request returned by the GitHub API
     private final GitHubProperties gitHubProperties;
@@ -23,7 +23,7 @@ public class GitHubService {
 
     /* *** Constructor *** */
 
-    public GitHubService(GitHubProperties gitHubProperties) {
+    public GitHubMultiService(GitHubProperties gitHubProperties) {
         this.gitHubProperties = gitHubProperties;
         this.client = new OkHttpClient();
     }
@@ -68,9 +68,6 @@ public class GitHubService {
             // Read the response body as a string
             String responseBodyString = responseBody.string();
 
-            // Print the response body for logging
-            System.out.println(responseBodyString);
-
             // Check if the response is successful
             if (response.isSuccessful()) {
                 // Parse the response body string as an array of Commit objects
@@ -102,7 +99,6 @@ public class GitHubService {
                 throw new IOException("Response body is null");
             }
             String responseBodyString = responseBody.string();
-            System.out.println(responseBodyString);
             if (response.isSuccessful()) {
                 return gson.fromJson(responseBodyString, BranchesListBranch[].class);
             } else {

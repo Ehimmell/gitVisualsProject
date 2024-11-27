@@ -1,7 +1,7 @@
-package com.example.demo.gitHubCommits.controller;
+package com.example.demo.gitHubData.controller;
 
-import com.example.demo.gitHubCommits.model.BranchesListBranch;
-import com.example.demo.gitHubCommits.service.GitHubService;
+import com.example.demo.gitHubData.model.BranchesListBranch;
+import com.example.demo.gitHubData.service.GitHubMultiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class BranchesController {
 
-    private final GitHubService gitHubCommitService;
+    private final GitHubMultiService gitHubCommitService;
 
     @Autowired
-    public BranchesController(GitHubService service) {
+    public BranchesController(GitHubMultiService service) {
         this.gitHubCommitService = service;
     }
 

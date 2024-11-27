@@ -1,4 +1,4 @@
-package com.example.demo.gitHubCommits.model;
+package com.example.demo.gitHubData.model;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;

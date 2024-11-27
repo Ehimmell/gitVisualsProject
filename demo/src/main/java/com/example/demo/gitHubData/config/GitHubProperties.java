@@ -1,4 +1,4 @@
-package com.example.demo.gitHubCommits.config;
+package com.example.demo.gitHubData.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.example.demo.gitHubCommits.model;
+package com.example.demo.gitHubData.model;
 
 import lombok.Getter;
 import lombok.Setter;

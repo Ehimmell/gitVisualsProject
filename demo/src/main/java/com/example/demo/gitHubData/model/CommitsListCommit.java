@@ -1,4 +1,4 @@
-package com.example.demo.gitHubCommits.model;
+package com.example.demo.gitHubData.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,23 +17,7 @@ public class CommitsListCommit {
 
     @Getter
     @Setter
-    private String html_url;
-
-    @Getter
-    @Setter
-    private Author author;
-
-    @Getter
-    @Setter
-    private Author commiter;
-
-    @Getter
-    @Setter
-    private Tree tree;
-
-    @Getter
-    @Setter
-    private String message;
+    private CommitDetail commit;
 
     @Getter
     @Setter
@@ -41,5 +25,13 @@ public class CommitsListCommit {
 
     @Getter
     @Setter
-    private Verification verification;
+    private String url;
+
+    @Getter
+    @Setter
+    private String comments_url;
+
+    @Getter
+    @Setter
+    private String html_url;
 }

@@ -1,9 +1,9 @@
-package com.example.demo.gitHubCommits.model;
+package com.example.demo.gitHubData.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class Parent {
+public class BranchCommit {
 
     @Getter
     @Setter
@@ -12,8 +12,4 @@ public class Parent {
     @Getter
     @Setter
     private String url;
-
-    @Getter
-    @Setter
-    private String html_url;
 }

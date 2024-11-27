@@ -1,15 +1,15 @@
-package com.example.demo.gitHubCommits.model;
+package com.example.demo.gitHubData.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class BranchCommit {
+public class Tree {
 
-    @Getter
     @Setter
+    @Getter
     private String sha;
 
-    @Getter
     @Setter
+    @Getter
     private String url;
 }
