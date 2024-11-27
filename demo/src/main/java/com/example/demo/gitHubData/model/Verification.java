@@ -3,23 +3,17 @@ package com.example.demo.gitHubData.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
+@Getter
 public class Verification {
 
     private boolean verified;
 
-    @Getter
-    @Setter
     private String reason;
 
-    @Getter
-    @Setter
     private String signature;
 
-    @Getter
-    @Setter
     private String payload;
 
-    @Getter
-    @Setter
     private String verified_at;
 }

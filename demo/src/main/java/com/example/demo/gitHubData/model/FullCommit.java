@@ -5,13 +5,11 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 public class FullCommit extends CommitsListCommit {
 
-    @Getter
-    @Setter
     private Stats stats;
 
-    @Getter
-    @Setter
     private List<File> files;
 }

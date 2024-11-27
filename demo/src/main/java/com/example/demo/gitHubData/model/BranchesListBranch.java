@@ -4,18 +4,14 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
+@Getter
 public class BranchesListBranch {
 
-    @Setter
-    @Getter
     private String name;
 
-    @Setter
-    @Getter
     private BranchCommit commit;
 
-    @Getter
-    @Setter
     @SerializedName("protected")
     private boolean isProtected;
 }
