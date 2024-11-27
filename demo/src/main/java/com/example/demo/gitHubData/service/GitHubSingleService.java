@@ -1,6 +1,7 @@
 package com.example.demo.gitHubData.service;
 
 import com.example.demo.gitHubData.config.GitHubProperties;
+import com.example.demo.gitHubData.model.FullBranch;
 import com.example.demo.gitHubData.model.FullCommit;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,9 @@ public class GitHubSingleService extends GitHubService {
 
     public FullCommit getCommit(String owner, String repo, String sha) throws IOException {
         return get(owner, repo, "commits", sha, FullCommit.class);
+    }
+
+    public FullBranch getBranch(String owner, String repo, String name) throws IOException {
+        return get(owner, repo, "branches", name, FullBranch.class);
     }
 }
