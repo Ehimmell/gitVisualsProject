@@ -1,7 +1,9 @@
 package com.example.demo.gitHubData.controller;
 
 import com.example.demo.gitHubData.model.CommitsListCommit;
+import com.example.demo.gitHubData.model.FullCommit;
 import com.example.demo.gitHubData.service.GitHubMultiService;
+import com.example.demo.gitHubData.service.GitHubSingleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +17,13 @@ import java.util.List;
 @RequestMapping("/api")
 public class CommitsController {
 
-    private final GitHubMultiService gitHubCommitsService;
+    private final GitHubMultiService gitHubMultiService;
+    private final GitHubSingleService gitHubSingleService;
 
     @Autowired
-    public CommitsController(GitHubMultiService service) {
-        this.gitHubCommitsService = service;
+    public CommitsController(GitHubMultiService gitHubMultiService, GitHubSingleService gitHubSingleService) {
+        this.gitHubSingleService = gitHubSingleService;
+        this.gitHubMultiService = gitHubMultiService;
     }
 
     @GetMapping("/commits")
@@ -27,9 +31,23 @@ public class CommitsController {
             @RequestParam String owner,
             @RequestParam String repo) {
         try {
-            CommitsListCommit[] commits = gitHubCommitsService.getAllCommits(owner, repo);
+            CommitsListCommit[] commits = gitHubMultiService.getAllCommits(owner, repo);
             return ResponseEntity.ok(Collections.singletonList(commits));
         } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/commit")
+    public ResponseEntity<FullCommit> getCommit(
+            @RequestParam String owner,
+            @RequestParam String repo,
+            @RequestParam String sha) {
+
+        try {
+            FullCommit commit = gitHubSingleService.getCommit(owner, repo, sha);
+            return ResponseEntity.ok(commit);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

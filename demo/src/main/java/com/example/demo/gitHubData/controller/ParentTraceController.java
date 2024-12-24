@@ -1,7 +1,7 @@
 package com.example.demo.gitHubData.controller;
 
-import com.example.demo.gitHubData.model.FullCommit;
-import com.example.demo.gitHubData.service.GitHubSingleService;
+import com.example.demo.gitHubData.model.Parent;
+import com.example.demo.gitHubData.service.GitHubParentTraceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,25 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
-public class CommitController {
-    private final GitHubSingleService gitHubCommitService;
+public class ParentTraceController {
+
+    private final GitHubParentTraceService gitHubParentTraceService;
 
     @Autowired
-    public CommitController(GitHubSingleService service) {
-        this.gitHubCommitService = service;
+    public ParentTraceController(GitHubParentTraceService gitHubParentTraceService) {
+        this.gitHubParentTraceService = gitHubParentTraceService;
     }
 
-    @GetMapping("/commit")
-    public ResponseEntity<FullCommit> getCommit(
+    @GetMapping("/parents")
+    public ResponseEntity<List<Parent>> getParent(
             @RequestParam String owner,
             @RequestParam String repo,
             @RequestParam String sha) {
-
         try {
-            FullCommit commit = gitHubCommitService.getCommit(owner, repo, sha);
-            return ResponseEntity.ok(commit);
+            List<Parent> parentTrace = gitHubParentTraceService.getParentTrace(owner, repo, sha);
+            return ResponseEntity.ok(parentTrace);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
