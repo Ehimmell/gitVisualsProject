@@ -22,6 +22,7 @@ public class GitHubSingleService extends GitHubService {
         setProperties(gitHubProperties, owner, repo);
 
         String format = "https://api.github.com/repos/%s/%s/%s/%s";
+
         String full = String.format(format, gitHubProperties.getUsername(), gitHubProperties.getRepoName(), endpoint, sha);
 
         Request request = makeRequest(full);

@@ -26,12 +26,12 @@ public class GitHubService {
         gitHubProperties.setToken(System.getenv("GHP"));
     }
 
-    @NotNull
     public Request makeRequest(String url) {
+        String authorizationHeader = "token " + gitHubProperties.getToken();
         return new Request.Builder()
-                .url(url)
-                .addHeader("Authorization", "token " + gitHubProperties.getToken())
-                .addHeader("Accept", "application/vnd.github.v3+json")
-                .build();
+            .url(url)
+            .addHeader("Authorization", authorizationHeader)
+            .addHeader("Accept", "application/vnd.github.v3+json")
+            .build();
     }
 }
