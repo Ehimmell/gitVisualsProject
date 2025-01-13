@@ -18,18 +18,20 @@ public class CommitTreeTraceService {
     }
 
     private List<CommitNode> makeTree(Map<String, List<String>> parentMap, String startSha) {
+        Map<Integer, Integer> breadthLog = new HashMap<>();
+
         List<CommitNode> res = new ArrayList<>();
 
         Set<String> vis = new HashSet<>();
 
         int startDepth = 0;
 
-        treeHelper(startSha, parentMap, res, startDepth, vis);
+        treeHelper(startSha, parentMap, res, startDepth, vis, breadthLog);
 
         return res;
     }
 
-    private void treeHelper(String sha, Map<String, List<String>> parentMap, List<CommitNode> res, int depth, Set<String> vis) {
+    private void treeHelper(String sha, Map<String, List<String>> parentMap, List<CommitNode> res, int depth, Set<String> vis, Map<Integer, Integer> breadthLog) {
         if(vis.contains(sha) || sha.isEmpty())
             return;
 
@@ -37,12 +39,16 @@ public class CommitTreeTraceService {
 
         List<String> parents = parentMap.getOrDefault(sha, new ArrayList<>());
 
-        CommitNode node = new CommitNode(sha, parents, depth);
+        int breadth = breadthLog.getOrDefault(depth, 0);
+
+        breadthLog.put(depth, breadth + 1);
+
+        CommitNode node = new CommitNode(sha, parents, depth, breadth);
 
         res.add(node);
 
         for(String parentSha : parents) {
-            treeHelper(parentSha, parentMap, res, depth + 1, vis);
+            treeHelper(parentSha, parentMap, res, depth + 1, vis, breadthLog);
         }
     }
 

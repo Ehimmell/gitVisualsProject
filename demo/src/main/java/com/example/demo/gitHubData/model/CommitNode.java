@@ -15,11 +15,15 @@ public class CommitNode {
 
     public int depth;
 
-    public CommitNode(String sha, List<String> parentShas, int depth) {
+    public int breadth;
+
+    public CommitNode(String sha, List<String> parentShas, int depth, int breadth) {
         this.sha = sha;
 
         this.parentShas = parentShas;
 
         this.depth = depth;
+
+        this.breadth = breadth;
     }
 }
