@@ -1,6 +1,7 @@
 package com.example.demo.gitHubData.service;
 
 import com.example.demo.gitHubData.config.GitHubProperties;
+import com.example.demo.gitHubData.model.CommitDetail;
 import com.example.demo.gitHubData.model.CommitNode;
 import com.example.demo.gitHubData.model.CommitsListCommit;
 import com.example.demo.gitHubData.model.Parent;
@@ -20,7 +21,7 @@ public class CommitTreeTraceService {
     }
 
     //Helper method to add breadth and depth elements to commits in a given tree
-    private List<CommitNode> makeTree(Map<String, List<String>> parentMap, String startSha) {
+    private List<CommitNode> makeTree(Map<String, List<String>> parentMap, Map<String, String> messageMap, String startSha) {
 
         //Map to track breadth(verticality) of tree
         Map<Integer, Integer> breadthLog = new HashMap<>();
@@ -35,14 +36,14 @@ public class CommitTreeTraceService {
         int startDepth = 0;
 
         //Start recursive building
-        treeHelper(startSha, parentMap, res, startDepth, vis, breadthLog);
+        treeHelper(startSha, parentMap, messageMap, res, startDepth, vis, breadthLog);
 
         //Return tree list post recursion
         return res;
     }
 
     //Helper to makeTree for recursion and tree size processing
-    private void treeHelper(String sha, Map<String, List<String>> parentMap, List<CommitNode> res, int depth, Set<String> vis, Map<Integer, Integer> breadthLog) {
+    private void treeHelper(String sha, Map<String, List<String>> parentMap, Map<String, String> messageMap, List<CommitNode> res, int depth, Set<String> vis, Map<Integer, Integer> breadthLog) {
 
         //If commit has already been processed, return
         if(vis.contains(sha) || sha.isEmpty())
@@ -57,18 +58,21 @@ public class CommitTreeTraceService {
         //Get breadth of commit, if no nodes exist on that level, establish as the first
         int breadth = breadthLog.getOrDefault(depth, 0);
 
+        //Get commit message associated with commit
+        String message = messageMap.getOrDefault(sha, "");
+
         //Tick the breadth on that level
         breadthLog.put(depth, breadth + 1);
 
         //Create new commit node
-        CommitNode node = new CommitNode(sha, parents, depth, breadth);
+        CommitNode node = new CommitNode(sha, parents, depth, breadth, message);
 
         //Add node to tree
         res.add(node);
 
         //Recursively call on parents
         for(String parentSha : parents) {
-            treeHelper(parentSha, parentMap, res, depth + 1, vis, breadthLog);
+            treeHelper(parentSha, parentMap, messageMap, res, depth + 1, vis, breadthLog);
         }
     }
 
@@ -79,6 +83,9 @@ public class CommitTreeTraceService {
 
         //Map to store parent relationships
         Map<String, List<String>> parentMap = new HashMap<>();
+
+        //Map to store commit messages to shas
+        Map<String, String> messageMap = new HashMap<>();
 
         //Starting sha for recursion
         String startSha = null;
@@ -93,6 +100,9 @@ public class CommitTreeTraceService {
             //Get parents of commit
             List<Parent> parents = commit.getParents();
 
+            //Add commit message to map
+            messageMap.put(commit.getSha(), commit.getCommit().getMessage());
+
             //List to store parent shas
             List<String> parentShas = new ArrayList<>();
 
@@ -106,6 +116,6 @@ public class CommitTreeTraceService {
         }
 
         //Return tree
-        return makeTree(parentMap, startSha);
+        return makeTree(parentMap, messageMap, startSha);
     }
 }

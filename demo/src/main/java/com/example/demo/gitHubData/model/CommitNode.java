@@ -13,11 +13,13 @@ public class CommitNode {
 
     public List<String> parentShas;
 
+    public String message;
+
     public int depth;
 
     public int breadth;
 
-    public CommitNode(String sha, List<String> parentShas, int depth, int breadth) {
+    public CommitNode(String sha, List<String> parentShas, int depth, int breadth, String message) {
         this.sha = sha;
 
         this.parentShas = parentShas;
@@ -25,5 +27,7 @@ public class CommitNode {
         this.depth = depth;
 
         this.breadth = breadth;
+
+        this.message = message;
     }
 }
