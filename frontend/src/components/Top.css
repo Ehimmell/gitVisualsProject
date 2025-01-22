@@ -1,0 +1,20 @@
+.top-tab {
+    background-color: #3C7544;
+    padding-top:15px;
+    padding-bottom:15px;
+    font-size:125%;
+    color:#171111;
+    font-family: 'Futura', serif;
+    display:flex;
+    justify-content:center;
+}
+
+.top-tab > * {
+    margin-left:80px;
+    margin-right:80px;
+}
+
+
+.first-drop {
+    margin-left:120px;
+}
