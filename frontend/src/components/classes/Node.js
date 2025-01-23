@@ -1,6 +1,7 @@
 export default class Node {
-    constructor(id, message, cx, cy, rad, fill, stroke, strokeWidth, connections) {
+    constructor(id, sha, message, cx, cy, rad, fill, stroke, strokeWidth, connections) {
         this.id = id;
+        this.sha = sha;
         this.message = message;
         this.cx = cx;
         this.cy = cy;
