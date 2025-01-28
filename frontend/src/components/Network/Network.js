@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 import Node from './classes/Node'
-import RepoTreeAPIHandler from './Logistics/APIHandler'
+import RepoTreeAPIHandler from './Logistics/TreeAPIHandler'
 import Loading from './Loading'
 
 export default function Network({ owner, repo }) {
