@@ -1,0 +1,43 @@
+.searchbars-container-1 {
+    display:flex;
+    justify-content:center;
+}
+
+
+.container-1 {
+    justify-content:center;
+    margin-bottom:50px;
+}
+
+.searchbars-container-1 > h3 {
+    font-family: 'Futura', serif;
+    color:floralwhite;
+}
+
+.searchbars-container-1 > input {
+    font-family: 'Futura', serif;
+    color: #333333;
+    width: 200px;
+    height: 30px;
+    margin-right: 10px;
+    font-size: 125%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, floralwhite, lightgrey);
+    border: 1px solid #b0b0b0;
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.5),
+        2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.unstyled-clear-1 {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 125%;
+    font-family: 'Futura', serif;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}

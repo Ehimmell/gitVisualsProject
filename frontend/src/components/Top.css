@@ -1,12 +1,18 @@
 .top-tab {
-    background-color: #3C7544;
-    padding-top:15px;
-    padding-bottom:15px;
-    font-size:125%;
-    color:#171111;
+    /* Create a vertical gradient from a lighter green to the primary green */
+    background: linear-gradient(to bottom, #4CAF50 0%, #3C7544 100%);
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 125%;
+    color: #171111;
     font-family: 'Futura', serif;
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    transition: background 0.3s ease;
 }
 
 .top-tab > * {

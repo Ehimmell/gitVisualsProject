@@ -1,138 +1,123 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as d3 from 'd3';
-import Node from './classes/Node';
-import RepoTreeAPIHandler from './Logistics/APIHandler';
+import React, { useEffect, useRef, useState } from 'react'
+import * as d3 from 'd3'
+import Node from './classes/Node'
+import RepoTreeAPIHandler from './Logistics/APIHandler'
+import Loading from './Loading'
 
-export default function Network() {
-  const [circles, setCircles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const rad = 50;
-
-  const svgRef = useRef(null);
-  const gRef = useRef(null);
+export default function Network({ owner, repo }) {
+  const [circles, setCircles] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const rad = 50
+  const svgRef = useRef(null)
+  const gRef = useRef(null)
 
   const zoomBehavior = d3.zoom()
     .scaleExtent([0.1, 5])
-    .on('zoom', (event) => {
-      if (gRef.current) {
-        d3.select(gRef.current)
-          .attr('transform', event.transform);
-      }
-    });
+    .on('zoom', e => {
+      if (gRef.current) d3.select(gRef.current).attr('transform', e.transform)
+    })
 
   useEffect(() => {
-    const fetchData = async () => {
+    ;(async () => {
       try {
-        setLoading(true);
-        const blueprints = await RepoTreeAPIHandler('Ehimmell', 'launchPad2024-5Project');
-
-        const shaMap = new Map();
-
-        blueprints.forEach((b, i) => {
-            shaMap.set(b[0], i);
-        });
-
-        if (!Array.isArray(blueprints)) {
-          throw new Error('Blueprints data is not an array.');
-        }
-
-        const nodes = blueprints.map((b, i) => {
-          console.log(`Mapping blueprint ${i}:`, b);
-          if (!Array.isArray(b) || b.length < 6) {
-            console.warn(`Blueprint ${i} is malformed:`, b);
-            return null;
-          }
-
-          const node = new Node(
-              shaMap.get(b[0]) || 0,
-            b[0],
-            b[1].length < 13 ? b[1] : b[1].slice(0, 13) + '...',
-            (b[2] + 1) * rad * 4,
-            ((b[4] - b[3]) + 1) * rad * 4,
-            rad,
-            'gray',
-            '#A9A9A9',
-            4,
-            b[5].map((p) => shaMap.get(p))
-          );
-          return node;
-        }).filter(node => node !== null);
-
-        setCircles(nodes);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Failed to load data.');
-        setLoading(false);
+        setLoading(true)
+        const data = await RepoTreeAPIHandler(owner, repo)
+        const map = new Map()
+        data.forEach((d, i) => map.set(d[0], i))
+        const result = data
+          .map(d => {
+            if (!Array.isArray(d) || d.length < 6) return null
+            return new Node(
+              map.get(d[0]) || 0,
+              d[0],
+              d[1].length < 13 ? d[1] : d[1].slice(0, 13) + '...',
+              (d[2] + 1) * rad * 4,
+              (d[4] - d[3] + 1) * rad * 4,
+              rad,
+              'url(#shinyGray)',
+              '#A9A9A9',
+              4,
+              d[5].map(p => map.get(p)),
+              d[6] // Assuming `sha` is at index 6; adjust accordingly
+            )
+          })
+          .filter(Boolean)
+        setCircles(result)
+        setLoading(false)
+      } catch {
+        setError('Failed to load data.')
+        setLoading(false)
       }
-    };
-
-    fetchData();
-  }, []);
+    })()
+  }, [owner, repo])
 
   useEffect(() => {
-    if (svgRef.current) {
-      d3.select(svgRef.current)
-        .call(zoomBehavior);
-    }
-
+    if (svgRef.current) d3.select(svgRef.current).call(zoomBehavior)
     return () => {
-      if (svgRef.current) {
-        d3.select(svgRef.current).on('.zoom', null);
-      }
-    };
-  }, [zoomBehavior, circles]);
+      if (svgRef.current) d3.select(svgRef.current).on('.zoom', null)
+    }
+  }, [zoomBehavior, circles])
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  const handleClick = (sha) => {
+    console.log(`Clicked on SHA: ${sha}`)
+  }
+
+  if (loading) return <Loading />
+  if (error) return <div>{error}</div>
 
   return (
     <div>
-      <svg
-        ref={svgRef}
-        width="100%"
-        height="100vh"
-        style={{ touchAction: 'none' }}
-      >
+      <svg ref={svgRef} width="100%" height="100vh" style={{ touchAction: 'none' }}>
+        <defs>
+          <linearGradient id="shinyGray" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#555" />
+            <stop offset="50%" stopColor="#777" />
+            <stop offset="100%" stopColor="#333" />
+          </linearGradient>
+          <linearGradient id="animatedShine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+        </defs>
         <g ref={gRef}>
-          {circles.map((sourceCircle) =>
-            sourceCircle.connections.map((connectedIndex) => {
-              const targetCircle = circles[connectedIndex];
-              if (!targetCircle) {
-                console.warn(
-                  `Invalid connection index ${connectedIndex} ` +
-                  `in sourceCircle ${sourceCircle.id}`
-                );
-                return null;
-              }
-
+          {circles.map(s =>
+            s.connections.map(ti => {
+              const t = circles[ti]
+              if (!t) return null
               return (
                 <line
-                  key={`${sourceCircle.id}-to-${targetCircle.id}`}
-                  x1={sourceCircle.cx}
-                  y1={sourceCircle.cy}
-                  x2={targetCircle.cx}
-                  y2={targetCircle.cy}
+                  key={`${s.id}-to-${t.id}`}
+                  x1={s.cx}
+                  y1={s.cy}
+                  x2={t.cx}
+                  y2={t.cy}
                   stroke="white"
                   strokeWidth={2}
                 />
-              );
+              )
             })
           )}
-          {circles.map((c) => (
-            <circle
-              key={c.id}
-              cx={c.cx}
-              cy={c.cy}
-              r={c.rad}
-              fill={c.fill}
-              stroke={c.stroke}
-              strokeWidth={c.strokeWidth}
-            >{c.message}</circle>
+          {circles.map(c => (
+            <g key={`group-${c.id}`}>
+              <circle
+                cx={c.cx}
+                cy={c.cy}
+                r={c.rad}
+                fill="url(#shinyGray)"
+                stroke={c.stroke}
+                strokeWidth={c.strokeWidth}
+              />
+              <circle
+                cx={c.cx}
+                cy={c.cy}
+                r={c.rad}
+                fill="url(#animatedShine)"
+              />
+            </g>
           ))}
-            {circles.map((c) => (
+          {circles.map(c => (
             <text
               key={`text-${c.id}`}
               x={c.cx}
@@ -141,12 +126,17 @@ export default function Network() {
               dominantBaseline="middle"
               fill="white"
               fontSize="12px"
-              pointerEvents="none"
-            >{c.message}
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleClick(c.sha)}
+              tabIndex="0"
+              role="button"
+              aria-label={`Commit ${c.message}`}
+            >
+              {c.message}
             </text>
           ))}
         </g>
       </svg>
     </div>
-  );
+  )
 }
