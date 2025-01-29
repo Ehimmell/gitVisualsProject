@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
-import Node from './classes/Node'
-import RepoTreeAPIHandler from './Logistics/TreeAPIHandler'
-import Loading from './Loading'
+import Node from './/Node';
+import RepoTreeAPIHandler from './TreeAPIHandler'
+import Loading from '../Loading/Loading'
 
 export default function Network({ owner, repo }) {
   const [circles, setCircles] = useState([])
@@ -39,7 +39,7 @@ export default function Network({ owner, repo }) {
               '#A9A9A9',
               4,
               d[5].map(p => map.get(p)),
-              d[6] // Assuming `sha` is at index 6; adjust accordingly
+              d[6]
             )
           })
           .filter(Boolean)

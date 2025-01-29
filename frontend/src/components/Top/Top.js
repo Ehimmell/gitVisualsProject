@@ -1,6 +1,6 @@
 import React from 'react';
 import './Top.css';
-import Dropdown from './Dropdown';
+import Dropdown from '../Dropdown/Dropdown';
 
 export default function Top() {
     return(

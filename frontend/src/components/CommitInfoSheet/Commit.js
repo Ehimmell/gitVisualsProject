@@ -1,12 +1,11 @@
 export default class Commit {
-    constructor(sha, message, author, date, totalChanges, additions, deletions, files) {
+    constructor(sha, author, committer, url, message, stats, files) {
         this.sha = sha;
-        this.message = message;
         this.author = author;
-        this.date = date;
-        this.totalChanges = totalChanges;
-        this.additions = additions;
-        this.deletions = deletions;
+        this.committer = committer;
+        this.url = url;
+        this.message = message;
+        this.stats = stats;
         this.files = files;
     }
 }
