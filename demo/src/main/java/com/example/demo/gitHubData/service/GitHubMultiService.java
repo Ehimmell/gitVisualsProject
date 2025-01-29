@@ -49,7 +49,6 @@ public class GitHubMultiService extends GitHubService {
                 // Parse the error response body to get more details
                 JsonObject errorObject = gson.fromJson(responseBodyString, JsonObject.class);
                 String message = errorObject.has("message") ? errorObject.get("message").getAsString() : "Unknown error";
-                // Throw an exception or handle the error as needed
                 throw new IOException("GitHub API request failed: " + message);
             }
         }
