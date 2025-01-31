@@ -1,0 +1,54 @@
+.file-button {
+    background-color:transparent;
+    border:none;
+    color:floralwhite;
+
+}
+
+.file-button:hover {
+    color:#4CAF50;
+    cursor:pointer;
+}
+
+.file-container-1 {
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color:black;
+    border: 2px solid dimgrey;
+    border-radius:10px;
+    width:480px;
+    padding-left: 10px;
+    padding-right:10px;
+    padding-bottom:10px;
+}
+
+.file-container-1 > a:link {
+  color:floralwhite;
+}
+
+.file-container-1 > a:visited {
+  color: #4CAF50;
+}
+
+.git {
+    font-family: 'Futura', serif;
+}
+
+.bulletless {
+    list-style-type: none;
+}
+
+.file-path-li {
+    margin:0;
+    font-size:75%;
+}
+
+.file-name {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.commit-container {
+    position:relative;
+    z-index:2;
+}
