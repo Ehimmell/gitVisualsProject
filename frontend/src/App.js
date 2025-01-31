@@ -37,9 +37,6 @@ function App() {
         onClear={handleClear}
       />
       {showNetwork && <Network owner={owner} repo={repo} />}
-      <CommitInfoSheet owner={'Ehimmell'} repo={'launchPad2024-5Project'} sha={'d15a71b8224ce09d188b8dbeb6162e0cc189a90c'}>
-
-      </CommitInfoSheet>
     </div>
   );
 }

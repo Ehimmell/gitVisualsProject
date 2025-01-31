@@ -1,0 +1,94 @@
+.info-sheet-container {
+  width: 580px;
+
+  background: linear-gradient(
+    135deg,
+    #000 0%,
+    #000 15%,
+    #0f3f0f 65%,
+    #0f3f0f 100%
+  );
+
+    color:floralwhite;
+
+    justify-self:center;
+
+    border-radius:10px;
+
+    border:2px solid dimgrey;
+
+    padding-right: 10px;
+
+    padding-left:10px;
+
+    overflow-wrap: break-word;
+}
+
+.files-list {
+
+}
+.files-list > a:link {
+  color:floralwhite;
+}
+
+.files-list > a:visited {
+  color: #4CAF50;
+}
+
+.git {
+    font-family: 'Futura', serif;
+  margin-top:5px;
+}
+
+.sha {
+  margin-bottom:0;
+  font-size:75%;
+}
+
+.title {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.person {
+  margin-top:2px;
+}
+
+.info {
+  margin-bottom:0;
+  font-size:75%;
+}
+
+.divider {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.stopping-person {
+  margin-bottom:0;
+  margin-top:2px;
+}
+
+.top-stat {
+  margin-bottom:5px;
+}
+
+.bottom-stat {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.x {
+  margin-left:auto;
+  font-size:300%;
+  margin-top:0;
+  margin-bottom:5px;
+  border:none;
+  background-color:transparent;
+  color:floralwhite;
+}
+
+.x:hover {
+  color:#4CAF50;
+  cursor:pointer;
+}

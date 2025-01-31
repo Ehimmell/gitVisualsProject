@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Commit from "./Commit";
-import File from "./File";
+import File from "../File/File";
 import Author from "./Author";
 import Stats from "./Stats";
 

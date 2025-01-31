@@ -8,7 +8,6 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
                 <h3 className="search-title">Search-a-Tree</h3>
             </div>
             <div className="searchbars-container-1">
-                <label htmlFor="owner" className="visually-hidden">Owner</label>
                 <input
                     id="owner"
                     type="text"
@@ -18,7 +17,6 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
                     onKeyDown={onKeyDown}
                 />
 
-                <label htmlFor="repo" className="visually-hidden">Repository</label>
                 <input
                     id="repo"
                     type="text"

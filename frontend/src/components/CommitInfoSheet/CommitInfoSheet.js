@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import CommitAPIHandler from "./CommitAPIHandler";
 import Loading from "../Loading/Loading";
+import './CommitInfoSheet.css';
+import FileInfo from "../File/FileInfo";
+
 
 export default function CommitInfoSheet(props) {
     const [loading, setLoading] = useState(true);
     const [commit, setCommit] = useState(null);
     const [files, setFiles] = useState([]);
+    const [x, setX] = useState(false);
     useEffect(() => {
         ;(async() => {
             try {
@@ -27,37 +31,43 @@ export default function CommitInfoSheet(props) {
         return <Loading></Loading>
     }
 
+    const onClick = () => {
+        props.onSendData(false);
+    }
+
+    const authorDate = commit.author.date.substring(0,commit.author.date.indexOf('T'));
+    const authorTime = commit.author.date.substring(commit.author.date.indexOf('T')+1, commit.author.date.indexOf('Z'));
+
+    const committerDate = commit.committer.date.substring(0,commit.committer.date.indexOf('T'));
+    const committerTime = commit.committer.date.substring(commit.committer.date.indexOf('T')+1, commit.committer.date.indexOf('Z'));
+
     return(
-        <div>
-            <h1>Commit Info</h1>
-            <h2>SHA:</h2>
-            <p>{commit.sha}</p>
-            <h2>Author:</h2>
-            <p>{commit.author.name ? commit.author.name : <em>No name</em>} on {commit.author.date ? commit.author.date : <em>No date</em>}</p>
-            <p>Email: {commit.author.email}</p>
-            <h2>Committer:</h2>
-            <p>{commit.committer.name} on {commit.committer.date}</p>
-            <p>Email: {commit.committer.email}</p>
-            <h2>Message:</h2>
-            <p>{commit.message}</p>
-            <h2>Change Stats:</h2>
-            <p>+: {commit.stats.additions}</p>
-            <p>-: {commit.stats.deletions}</p>
-            <p>Total: {commit.stats.total}</p>
-            <h2>Files:</h2>
+        <div className={"info-sheet-container"}>
+            <button onClick={onClick}className={'x'}>&times;</button>
+            <p className={'git'}><em><strong>git-commit</strong></em></p>
+            <p className={'sha'}>{commit.sha}</p>
+            <h1 className={'title'}>{commit.message}</h1>
+            <p className={'divider'}>_____________</p>
+            <h3 className={'info'}>Author</h3>
+            <p className={'person'}><strong>{commit.author.name}</strong> ({commit.author.email})
+                on <strong>{authorDate}</strong> at <strong>{authorTime}</strong></p>
+            <h3 className={'info'}>Committer</h3>
+            <p className={'stopping-person'}>{commit.committer.name} ({commit.committer.email})
+                on {committerDate} at {committerTime}</p>
+            <p className={'divider'}>_____________</p>
+            <p className={'top-stat'} style={{color: 'green'}}>+: {commit.stats.additions}</p>
+            <p className={'bottom-stat'} style={{color: 'red'}}>-: {commit.stats.deletions}</p>
+            <p className={'divider'}>_____________</p>
+            <h3>Files</h3>
             <ul>
                 {files.map(file => {
                     return (
-                        <li key={file.sha}>
-                            <h3>{file.filename}</h3>
-                            <p>Status: {file.status}</p>
-                            <p>+: {file.additions}</p>
-                            <p>-: {file.deletions}</p>
-                            <p>Changes: {file.changes}</p>
-                            <a href={file.blob_url}>Blob</a>
-                            <a href={file.raw_url}>Raw</a>
-                            <a href={file.contents_url}>Contents</a>
-                            <p>{file.patch}</p>
+                        <li className={"files-list"} key={file.sha}>
+                            <FileInfo
+                                title={file.filename} status={file.status} additions={file.additions}
+                                deletions={file.deletions} changes={file.changes} blob_url={file.blob_url}
+                                raw_url={file.raw_url} contents_url={file.contents_url} patch={file.patch}
+                            ></FileInfo>
                         </li>
                     )
                 })}

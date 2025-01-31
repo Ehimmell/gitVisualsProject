@@ -7,6 +7,10 @@
 .container-1 {
     justify-content:center;
     margin-bottom:50px;
+    background-color:transparent;
+    position:absolute;
+    width:100%;
+    z-index:2;
 }
 
 .searchbars-container-1 > h3 {
