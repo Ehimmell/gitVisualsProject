@@ -52,8 +52,8 @@ export default function CommitInfoSheet(props) {
             <p className={'person'}><strong>{commit.author.name}</strong> ({commit.author.email})
                 on <strong>{authorDate}</strong> at <strong>{authorTime}</strong></p>
             <h3 className={'info'}>Committer</h3>
-            <p className={'stopping-person'}>{commit.committer.name} ({commit.committer.email})
-                on {committerDate} at {committerTime}</p>
+            <p className={'stopping-person'}><strong>{commit.committer.name}</strong> ({commit.committer.email})
+                on <strong>{committerDate}</strong> at <strong>{committerTime}</strong></p>
             <p className={'divider'}>_____________</p>
             <p className={'top-stat'} style={{color: 'green'}}>+: {commit.stats.additions}</p>
             <p className={'bottom-stat'} style={{color: 'red'}}>-: {commit.stats.deletions}</p>

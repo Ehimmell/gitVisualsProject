@@ -22,11 +22,11 @@
     padding-bottom:10px;
 }
 
-.file-container-1 > a:link {
+.file-container-1 > p > a:link {
   color:floralwhite;
 }
 
-.file-container-1 > a:visited {
+.file-container-1 > p > a:visited {
   color: #4CAF50;
 }
 

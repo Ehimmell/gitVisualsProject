@@ -7,7 +7,6 @@ export default function Top() {
         <div>
             <div className= "top-tab">
                 <h1><em>git-trees</em></h1>
-                <Dropdown title="&#8964;"></Dropdown>
             </div>
         </div>
     )
