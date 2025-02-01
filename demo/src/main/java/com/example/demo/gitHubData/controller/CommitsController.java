@@ -2,6 +2,7 @@ package com.example.demo.gitHubData.controller;
 
 import com.example.demo.gitHubData.model.CommitsListCommit;
 import com.example.demo.gitHubData.model.FullCommit;
+import com.example.demo.gitHubData.service.DirectoryService;
 import com.example.demo.gitHubData.service.GitHubMultiService;
 import com.example.demo.gitHubData.service.GitHubSingleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ public class CommitsController {
 
     private final GitHubMultiService gitHubMultiService;
     private final GitHubSingleService gitHubSingleService;
+    private final DirectoryService directoryService;
 
     @Autowired
-    public CommitsController(GitHubMultiService gitHubMultiService, GitHubSingleService gitHubSingleService) {
+    public CommitsController(GitHubMultiService gitHubMultiService, GitHubSingleService gitHubSingleService, DirectoryService directoryService) {
         this.gitHubSingleService = gitHubSingleService;
         this.gitHubMultiService = gitHubMultiService;
+        this.directoryService = directoryService;
     }
 
     @GetMapping("/commits")
@@ -47,6 +50,8 @@ public class CommitsController {
 
         try {
             FullCommit commit = gitHubSingleService.getCommit(owner, repo, sha);
+            commit.setRoot(directoryService.map(commit.getFiles()));
+            commit.setFiles(null);
             return ResponseEntity.ok(commit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

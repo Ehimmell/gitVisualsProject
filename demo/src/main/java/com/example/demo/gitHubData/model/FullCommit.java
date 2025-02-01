@@ -12,4 +12,6 @@ public class FullCommit extends CommitsListCommit {
     private Stats stats;
 
     private List<File> files;
+
+    private Directory root;
 }
