@@ -52,6 +52,7 @@ public class CommitsController {
             FullCommit commit = gitHubSingleService.getCommit(owner, repo, sha);
             commit.setRoot(directoryService.map(commit.getFiles()));
             commit.setFiles(null);
+            System.out.println(commit);
             return ResponseEntity.ok(commit);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
