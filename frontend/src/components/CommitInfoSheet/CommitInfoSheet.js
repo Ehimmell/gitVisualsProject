@@ -3,6 +3,7 @@ import CommitAPIHandler from "./CommitAPIHandler";
 import Loading from "../Loading/Loading";
 import './CommitInfoSheet.css';
 import FileInfo from "../File/FileInfo";
+import FileDirectory from "../FileFolder/FileDirectory";
 
 
 export default function CommitInfoSheet(props) {
@@ -59,19 +60,7 @@ export default function CommitInfoSheet(props) {
             <p className={'bottom-stat'} style={{color: 'red'}}>-: {commit.stats.deletions}</p>
             <p className={'divider'}>_____________</p>
             <h3>Files</h3>
-            <ul>
-                {files.map(file => {
-                    return (
-                        <li className={"files-list"} key={file.sha}>
-                            <FileInfo
-                                title={file.filename} status={file.status} additions={file.additions}
-                                deletions={file.deletions} changes={file.changes} blob_url={file.blob_url}
-                                raw_url={file.raw_url} contents_url={file.contents_url} patch={file.patch}
-                            ></FileInfo>
-                        </li>
-                    )
-                })}
-            </ul>
+            <FileDirectory directory={commit.root}></FileDirectory>
 
 
         </div>

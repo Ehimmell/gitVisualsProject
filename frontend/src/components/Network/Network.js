@@ -25,6 +25,13 @@ export default function Network(props) {
         setCommit(null);
     }
 
+    const createComponents = (rad) => {
+        const xComponent = Math.random() * (rad * 2) - rad;
+        const yComponent = Math.sqrt(rad ** 2 - xComponent ** 2) * (Math.random() < 0.5 ? -1 : 1);
+
+        return [xComponent, yComponent];
+    }
+
     useEffect(() => {
         ;(async () => {
             try {
@@ -46,7 +53,7 @@ export default function Network(props) {
                             '#A9A9A9',
                             4,
                             d[5].map(p => map.get(p)),
-                            d[6]
+                            createComponents(rad)
                         )
                     })
                     .filter(Boolean)
@@ -90,6 +97,20 @@ export default function Network(props) {
                     </linearGradient>
                 </defs>
                 <g ref={gRef}>
+                    {circles.map(
+                        c => (
+                        <g key={`${c.id}-leafBranch`}>
+                            <line
+                                x1={c.cx+c.branchComponents[0]}
+                                y1={c.cy+c.branchComponents[1]}
+                                x2={c.cx+(c.branchComponents[0]*1.5)}
+                                y2={c.cy+(c.branchComponents[1]*1.5)}
+                                stroke="#A9A9A9"
+                                strokeWidth={2}
+                            >
+                            </line>
+                        </g>
+                    ))}
                     {circles.map((s, sIndex) =>
                         s.connections.map((ti, i) => {
                             const t = circles[ti]

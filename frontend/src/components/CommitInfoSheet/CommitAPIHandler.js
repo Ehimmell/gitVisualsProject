@@ -12,18 +12,20 @@ export default async function CommitAPIHandler(owner, repo, sha) {
 
         const data = response.data;
 
-        const files = data.files.map(file => {
-            const { sha, filename, status, additions, deletions, changes, blob_url, raw_url, contents_url, patch } = file;
-            return new File(sha, filename, status, additions, deletions, changes, blob_url, raw_url, contents_url, patch);
-        });
+        const root = data.root;
 
-        const author = new Author(data.commit.author.name, data.commit.author.email, data.commit.author.date);
-        const committer = new Author(data.commit.committer.name, data.commit.committer.email, data.commit.committer.date);
+        console.log(data.root.children);
+
+        const commit = data.commit;
+
+        const author = new Author(commit.author.name, commit.author.email, commit.author.date);
+        console.log('author: ' + JSON.stringify(author));
+        const committer = new Author(commit.committer.name, commit.committer.email, commit.committer.date);
         const stats = new Stats(data.stats.additions, data.stats.deletions, data.stats.total)
 
-        return new Commit(data.sha, author, committer, data.commit.url, data.commit.message, stats, files);
-    } catch {
-        console.error('Failed to load data.');
+        return new Commit(data.sha, author, committer, commit.url, commit.message, stats, root);
+    } catch(error) {
+        console.error('Failed to load data.' + error);
         return null;
     }
 }
