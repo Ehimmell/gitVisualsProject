@@ -1,21 +1,20 @@
 .searchbars-container-1 {
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
 }
 
-
 .container-1 {
-    justify-content:center;
-    margin-bottom:50px;
-    background-color:transparent;
-    position:absolute;
-    width:100%;
-    z-index:2;
+    justify-content: center;
+    margin-bottom: 50px;
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
 }
 
 .searchbars-container-1 > h3 {
     font-family: 'Futura', serif;
-    color:floralwhite;
+    color: floralwhite;
 }
 
 .searchbars-container-1 > input {
@@ -34,6 +33,18 @@
         2px 2px 5px rgba(0, 0, 0, 0.2);
     padding: 5px;
     transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Prevent input color changes on focus or active */
+.searchbars-container-1 > input:focus,
+.searchbars-container-1 > input:active {
+    background: linear-gradient(to bottom, floralwhite, lightgrey);
+    border: 1px solid #b0b0b0;
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.5),
+        2px 2px 5px rgba(0, 0, 0, 0.2);
+    outline: none;
 }
 
 .unstyled-clear-1 {

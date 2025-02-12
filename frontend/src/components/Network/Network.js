@@ -5,6 +5,7 @@ import RepoTreeAPIHandler from './TreeAPIHandler'
 import Loading from '../Loading/Loading'
 import CommitInfoSheet from "../CommitInfoSheet/CommitInfoSheet"
 import './Network.css'
+import Leaf from "../Leaf/Leaf";
 
 export default function Network({ owner, repo }) {
   const [circles, setCircles] = useState([])
@@ -57,7 +58,7 @@ export default function Network({ owner, repo }) {
               (d[4] - d[3] + 1) * rad * 4,
               rad,
               'url(#shinyGray)',
-              '#A9A9A9',
+              '#666666', // Updated to a darker grey stroke for nodes
               4,
               d[5].map(p => map.get(p)),
               createComponents()
@@ -84,10 +85,11 @@ export default function Network({ owner, repo }) {
     <div>
       <svg ref={svgRef} width="100%" height="100vh" style={{ touchAction: 'none' }} className="graph-container">
         <defs>
+          {/* Updated gradient for a darker grey appearance */}
           <linearGradient id="shinyGray" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#555" />
-            <stop offset="50%" stopColor="#777" />
-            <stop offset="100%" stopColor="#333" />
+            <stop offset="0%" stopColor="#333" />
+            <stop offset="50%" stopColor="#444" />
+            <stop offset="100%" stopColor="#222" />
           </linearGradient>
           <linearGradient id="animatedShine" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
@@ -97,12 +99,26 @@ export default function Network({ owner, repo }) {
         </defs>
         <g ref={gRef}>
           {circles.map(c => (
+            <g key={`${c.id}-leaf`}>
+              <Leaf
+                start={{
+                  x: c.cx + c.branchComponents[0] * 1.3,
+                  y: c.cy + c.branchComponents[1] * 1.3,
+                }}
+                end={{
+                  x: c.cx + c.branchComponents[0] * 2.5,
+                  y: c.cy + c.branchComponents[1] * 2.5,
+                }}
+              />
+            </g>
+          ))}
+          {circles.map(c => (
             <g key={`${c.id}-leafBranch`}>
               <line
                 x1={c.cx + c.branchComponents[0]}
                 y1={c.cy + c.branchComponents[1]}
-                x2={c.cx + c.branchComponents[0] * 1.5}
-                y2={c.cy + c.branchComponents[1] * 1.5}
+                x2={c.cx + c.branchComponents[0] * 1.3}
+                y2={c.cy + c.branchComponents[1] * 1.3}
                 stroke="#A9A9A9"
                 strokeWidth={2}
               />
@@ -119,7 +135,7 @@ export default function Network({ owner, repo }) {
                   y1={s.cy}
                   x2={t.cx}
                   y2={t.cy}
-                  stroke="white"
+                  stroke="grey"
                   strokeWidth={2}
                 />
               )
@@ -127,7 +143,14 @@ export default function Network({ owner, repo }) {
           )}
           {circles.map(c => (
             <g key={`group-${c.id}`}>
-              <circle cx={c.cx} cy={c.cy} r={c.rad} fill="url(#shinyGray)" stroke={c.stroke} strokeWidth={c.strokeWidth} />
+              <circle
+                cx={c.cx}
+                cy={c.cy}
+                r={c.rad}
+                fill="url(#shinyGray)"
+                stroke={c.stroke}
+                strokeWidth={c.strokeWidth}
+              />
               <circle cx={c.cx} cy={c.cy} r={c.rad} fill="url(#animatedShine)" />
             </g>
           ))}
@@ -149,6 +172,7 @@ export default function Network({ owner, repo }) {
               {c.message}
             </text>
           ))}
+
         </g>
       </svg>
       {commit && (

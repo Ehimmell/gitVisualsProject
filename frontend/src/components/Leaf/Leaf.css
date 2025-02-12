@@ -1,0 +1,11 @@
+
+.Leaf {
+  pointer-events: none;
+}
+
+.Leaf__shape {
+}
+
+.Leaf__vein {
+  stroke-linecap: round;
+}
