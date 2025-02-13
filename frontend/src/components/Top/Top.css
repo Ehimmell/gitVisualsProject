@@ -1,25 +1,27 @@
 .top-tab {
-    /* Create a vertical gradient from a lighter green to the primary green */
-    background: linear-gradient(to bottom, #4CAF50 0%, #3C7544 100%);
+    background: floralwhite;
 
     padding-top: 15px;
     padding-bottom: 15px;
-    font-size: 125%;
-    color: #171111;
+    color: floralwhite;
     font-family: 'Futura', serif;
     display: flex;
     justify-content: center;
+
+    height: 20px;
+    align-items: center;
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     transition: background 0.3s ease;
 }
-
 .top-tab > * {
-    margin-left:80px;
-    margin-right:80px;
+    margin-left:40px;
+    margin-right:40px;
+    background: linear-gradient(to bottom, rgba(76, 175, 80, 0.3) 0%, rgba(60, 117, 68, 0.2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
 
 .first-drop {
     margin-left:120px;

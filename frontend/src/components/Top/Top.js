@@ -6,7 +6,9 @@ export default function Top() {
     return(
         <div>
             <div className= "top-tab">
-                <h1><em>git-trees</em></h1>
+                    <h1><em>git-trees</em></h1>
+                    <p>Search</p>
+                    <p>About</p>
             </div>
         </div>
     )

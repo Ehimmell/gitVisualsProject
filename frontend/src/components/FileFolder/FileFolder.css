@@ -1,14 +1,13 @@
 .directory-button {
   background-color: transparent;
   border: none;
-  color: floralwhite;
+  color: black;
   font-size: 1.1em;
   margin-top: 2px;
   margin-bottom: 2px;
 }
 
 .directory-button:hover {
-  color: #4CAF50;
   cursor: pointer;
 }
 

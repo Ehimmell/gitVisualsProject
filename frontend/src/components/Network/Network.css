@@ -15,4 +15,10 @@
 .graph-container {
     position:absolute;
     z-index:1;
+    background-color:black;
+}
+
+.background {
+    background-color:slategrey;
+    width:100vw;
 }

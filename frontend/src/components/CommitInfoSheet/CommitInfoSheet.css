@@ -1,18 +1,11 @@
 .info-sheet-container {
   width: 580px;
 
-  background: linear-gradient(
-    135deg,
-    #000 0%,
-    #000 15%,
-    #001100 65%,
-    #001100 100%
-  );
-    color:floralwhite;
+  background: floralwhite;
+    color:black;
 
     justify-self:center;
 
-    border-radius:10px;
 
     border:2px solid dimgrey;
 
@@ -84,10 +77,9 @@
   margin-bottom:5px;
   border:none;
   background-color:transparent;
-  color:floralwhite;
+  color:black;
 }
 
 .x:hover {
-  color:#4CAF50;
   cursor:pointer;
 }

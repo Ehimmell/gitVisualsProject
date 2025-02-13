@@ -58,7 +58,7 @@ export default function Network({ owner, repo }) {
               (d[4] - d[3] + 1) * rad * 4,
               rad,
               'url(#shinyGray)',
-              '#666666', // Updated to a darker grey stroke for nodes
+              '#999999', // Lighter grey stroke for nodes
               4,
               d[5].map(p => map.get(p)),
               createComponents()
@@ -82,14 +82,20 @@ export default function Network({ owner, repo }) {
   if (error) return <div>{error}</div>
 
   return (
-    <div>
-      <svg ref={svgRef} width="100%" height="100vh" style={{ touchAction: 'none' }} className="graph-container">
+    <div className={"background"}>
+      <svg
+        ref={svgRef}
+        width="100%"
+        height="100vh"
+        style={{ touchAction: 'none' }}
+        className="graph-container"
+      >
         <defs>
-          {/* Updated gradient for a darker grey appearance */}
+          {/* Updated gradient for a lighter look */}
           <linearGradient id="shinyGray" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#333" />
-            <stop offset="50%" stopColor="#444" />
-            <stop offset="100%" stopColor="#222" />
+            <stop offset="0%" stopColor="#bbb" />
+            <stop offset="50%" stopColor="#ccc" />
+            <stop offset="100%" stopColor="#aaa" />
           </linearGradient>
           <linearGradient id="animatedShine" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
@@ -119,7 +125,7 @@ export default function Network({ owner, repo }) {
                 y1={c.cy + c.branchComponents[1]}
                 x2={c.cx + c.branchComponents[0] * 1.3}
                 y2={c.cy + c.branchComponents[1] * 1.3}
-                stroke="#A9A9A9"
+                stroke="lightgrey"
                 strokeWidth={2}
               />
             </g>
@@ -135,7 +141,7 @@ export default function Network({ owner, repo }) {
                   y1={s.cy}
                   x2={t.cx}
                   y2={t.cy}
-                  stroke="grey"
+                  stroke="lightgrey"
                   strokeWidth={2}
                 />
               )
@@ -172,13 +178,17 @@ export default function Network({ owner, repo }) {
               {c.message}
             </text>
           ))}
-
         </g>
       </svg>
       {commit && (
         <div className="commit-container">
           <div className="commit">
-            <CommitInfoSheet onSendData={() => setCommit(null)} owner={owner} repo={repo} sha={commit} />
+            <CommitInfoSheet
+              onSendData={() => setCommit(null)}
+              owner={owner}
+              repo={repo}
+              sha={commit}
+            />
           </div>
         </div>
       )}

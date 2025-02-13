@@ -1,12 +1,11 @@
 .file-button {
     background-color:transparent;
     border:none;
-    color:floralwhite;
+    color:black;
 
 }
 
 .file-button:hover {
-    color:#4CAF50;
     cursor:pointer;
 }
 
@@ -15,7 +14,7 @@
     margin-bottom:20px;
     background-color:black;
     border: 2px solid dimgrey;
-    border-radius:10px;
+    color:floralwhite;
     width:480px;
     padding-left: 10px;
     padding-right:10px;

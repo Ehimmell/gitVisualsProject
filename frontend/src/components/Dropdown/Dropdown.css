@@ -1,4 +1,32 @@
 .dropdown-text {
-    transform: scale(2);
-    margin-top:5px;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+    margin-left:15px;
+}
+.bar {
+  height: 4px;
+  width: 100%;
+  background-color: currentColor;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.bar1-active {
+  transform: translateY(10px) rotate(45deg);
+}
+.bar2-active {
+  opacity: 0;
+}
+.bar3-active {
+  transform: translateY(-10px) rotate(-45deg);
+}
+.bar1, .bar2, .bar3 {
+  transform: translateY(0) rotate(0);
 }
