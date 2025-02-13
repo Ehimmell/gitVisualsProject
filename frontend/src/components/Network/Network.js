@@ -90,19 +90,6 @@ export default function Network({ owner, repo }) {
         style={{ touchAction: 'none' }}
         className="graph-container"
       >
-        <defs>
-          {/* Updated gradient for a lighter look */}
-          <linearGradient id="shinyGray" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#bbb" />
-            <stop offset="50%" stopColor="#ccc" />
-            <stop offset="100%" stopColor="#aaa" />
-          </linearGradient>
-          <linearGradient id="animatedShine" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-          </linearGradient>
-        </defs>
         <g ref={gRef}>
           {circles.map(c => (
             <g key={`${c.id}-leaf`}>
@@ -125,7 +112,7 @@ export default function Network({ owner, repo }) {
                 y1={c.cy + c.branchComponents[1]}
                 x2={c.cx + c.branchComponents[0] * 1.3}
                 y2={c.cy + c.branchComponents[1] * 1.3}
-                stroke="lightgrey"
+                stroke="rgba(255, 255, 255, 0.12)"
                 strokeWidth={2}
               />
             </g>
@@ -141,7 +128,7 @@ export default function Network({ owner, repo }) {
                   y1={s.cy}
                   x2={t.cx}
                   y2={t.cy}
-                  stroke="lightgrey"
+                  stroke="rgba(255, 255, 255, 0.12)"
                   strokeWidth={2}
                 />
               )
@@ -153,11 +140,11 @@ export default function Network({ owner, repo }) {
                 cx={c.cx}
                 cy={c.cy}
                 r={c.rad}
-                fill="url(#shinyGray)"
-                stroke={c.stroke}
-                strokeWidth={c.strokeWidth}
+                fill="black"
+                stroke="rgba(255, 255, 255, 0.12)"
+                strokeWidth={2}
               />
-              <circle cx={c.cx} cy={c.cy} r={c.rad} fill="url(#animatedShine)" />
+              <circle cx={c.cx} cy={c.cy} r={c.rad} fill="black" />
             </g>
           ))}
           {circles.map(c => (
@@ -167,7 +154,7 @@ export default function Network({ owner, repo }) {
               y={c.cy}
               textAnchor="middle"
               dominantBaseline="middle"
-              fill="white"
+              fill="rgba(255, 255, 255, 0.6)"
               fontSize="12px"
               style={{ cursor: 'pointer', border: 'none' }}
               onClick={() => handleClick(c.sha)}

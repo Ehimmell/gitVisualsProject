@@ -1,7 +1,7 @@
 .file-button {
     background-color:transparent;
     border:none;
-    color:black;
+    color: rgba(255, 255, 255, 0.6);
 
 }
 
@@ -13,7 +13,8 @@
     margin-top:20px;
     margin-bottom:20px;
     background-color:black;
-    border: 2px solid dimgrey;
+    border:1px solid rgba(255, 255, 255, 0.12);
+    border-radius:10px;
     color:floralwhite;
     width:480px;
     padding-left: 10px;
@@ -40,6 +41,7 @@
 .file-path-li {
     margin:0;
     font-size:75%;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .file-name {

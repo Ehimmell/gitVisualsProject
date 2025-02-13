@@ -47,18 +47,15 @@ export default function CommitInfoSheet(props) {
             <button onClick={onClick}className={'x'}>&times;</button>
             <p className={'git'}><em><strong>git-commit</strong></em></p>
             <p className={'sha'}>{commit.sha}</p>
-            <h1 className={'title'}>{commit.message}</h1>
-            <p className={'divider'}>_____________</p>
+            <h1 style={{marginBottom:"20px"}} className={'title'}>{commit.message}</h1>
             <h3 className={'info'}>Author</h3>
             <p className={'person'}><strong>{commit.author.name}</strong> ({commit.author.email})
                 on <strong>{authorDate}</strong> at <strong>{authorTime}</strong></p>
             <h3 className={'info'}>Committer</h3>
-            <p className={'stopping-person'}><strong>{commit.committer.name}</strong> ({commit.committer.email})
+            <p style={{marginBottom:"20px"}} className={'stopping-person'}><strong>{commit.committer.name}</strong> ({commit.committer.email})
                 on <strong>{committerDate}</strong> at <strong>{committerTime}</strong></p>
-            <p className={'divider'}>_____________</p>
             <p className={'top-stat'} style={{color: 'green'}}>+: {commit.stats.additions}</p>
-            <p className={'bottom-stat'} style={{color: 'red'}}>-: {commit.stats.deletions}</p>
-            <p className={'divider'}>_____________</p>
+            <p className={'bottom-stat'} style={{marginBottom:"20px", color: 'red'}}>-: {commit.stats.deletions}</p>
             <h3>Files</h3>
             <FileDirectory directory={commit.root}></FileDirectory>
 

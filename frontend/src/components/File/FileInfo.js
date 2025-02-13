@@ -27,15 +27,12 @@ export default function FileInfo(props) {
                 {titlePieces.slice(0, len - 1).map(piece => {
                     return (<p className={"file-path-li"}><strong>{piece}/</strong></p>)
                 })}
-                <h2 className={'file-name'}>{titlePieces[len - 1]}</h2>
-                <p className={"divider"}>_____________</p>
+                <h2 style={{marginBottom:"20px"}} className={'file-name'}>{titlePieces[len - 1]}</h2>
                 <h3 className={'info'}>Status</h3>
                 <p className={'stopping-person'}
-                   style={{color: props.status === 'added' ? 'green' : 'red'}}>{Capitalize(props.status)}</p>
-                <p className={'divider'}>_____________</p>
+                   style={{marginBottom:"20px", color: props.status === 'added' ? 'green' : 'red'}}>{Capitalize(props.status)}</p>
                 <p style={{color: 'green'}} className={'top-stat'}>+: {props.additions}</p>
-                <p style={{color: 'red'}} className={'bottom-stat'}>-: {props.deletions}</p>
-                <p className={'divider'}>_____________</p>
+                <p style={{marginBottom:"20px", color: 'red'}} className={'bottom-stat'}>-: {props.deletions}</p>
                 <p>
                     <a href={props.blob_url}>Blob</a>
                     &nbsp;⋅&nbsp;

@@ -1,5 +1,4 @@
 .top-tab {
-    background: floralwhite;
 
     padding-top: 15px;
     padding-bottom: 15px;
@@ -16,13 +15,14 @@
     transition: background 0.3s ease;
 }
 .top-tab > * {
-    margin-left:40px;
-    margin-right:40px;
-    background: linear-gradient(to bottom, rgba(76, 175, 80, 0.3) 0%, rgba(60, 117, 68, 0.2) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .first-drop {
     margin-left:120px;
+}
+
+.title{
+    font-size:1.5em;
 }

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import './Leaf.css';
 
 const Leaf = ({ start, end }) => {
@@ -13,6 +13,7 @@ const Leaf = ({ start, end }) => {
     Z
   `;
 
+  // A random green value that you might use elsewhere (if needed)
   const randomGreen = useMemo(() => {
     return Math.floor(Math.random() * (40 - 10 + 1)) + 10;
   }, []);
@@ -29,22 +30,29 @@ const Leaf = ({ start, end }) => {
         overflow: 'visible',
       }}
     >
+      <defs>
+        <linearGradient id="leafGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="rgb(160, 228, 192)" />
+          <stop offset="100%" stopColor="rgb(216, 223, 206)" />
+        </linearGradient>
+      </defs>
       <g transform={`translate(${start.x}, ${start.y}) rotate(${angle})`}>
         <path
           d={pathData}
           className="Leaf__shape"
-          fill={`rgba(0,${randomGreen},0,0.6)`}
-          stroke="rgba(0,100,0,0.7)"
+          fill="url(#leafGradient)"
+          // Updated stroke color to a softer, lighter green
+          stroke="rgba(140, 190, 160, 0.8)"
           strokeWidth="2"
         />
-
         <line
           x1="0"
           y1="0"
           x2={L}
           y2="0"
           className="Leaf__vein"
-          stroke="rgba(0,100,0,0.9)"
+          // Updated stroke color for the vein with slightly higher opacity
+          stroke="rgba(140, 190, 160, 0.9)"
           strokeWidth="2"
         />
       </g>

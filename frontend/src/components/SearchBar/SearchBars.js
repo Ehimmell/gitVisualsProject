@@ -6,6 +6,7 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
         <div className="container-1">
             <div className="searchbars-container-1">
                 <input
+                    className={"input"}
                     id="owner"
                     type="text"
                     placeholder="Owner"
@@ -15,6 +16,7 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
                 />
 
                 <input
+                    className={"input"}
                     id="repo"
                     type="text"
                     placeholder="Repo"
@@ -28,7 +30,7 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
                     id="clear"
                     onClick={onClear}
                 >
-                    <u style={{color:'black'}}>Clear tree</u>
+                    <u style={{color:'rgba(255, 255, 255, 0.6)'}}>Clear tree</u>
                 </button>
             </div>
         </div>
