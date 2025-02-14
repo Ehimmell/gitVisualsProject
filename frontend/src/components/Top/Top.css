@@ -8,9 +8,12 @@
     justify-content: center;
 
     height: 20px;
-    align-items: center;
 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background:transparent;
+    align-items: center;
+    position:absolute;
+    z-index:10;
+
 
     transition: background 0.3s ease;
 }

@@ -5,7 +5,7 @@ import RepoTreeAPIHandler from './TreeAPIHandler'
 import Loading from '../Loading/Loading'
 import CommitInfoSheet from "../CommitInfoSheet/CommitInfoSheet"
 import './Network.css'
-import Leaf from "../Leaf/Leaf";
+import Leaf from "../Leaf/Leaf"
 
 export default function Network({ owner, repo }) {
   const [circles, setCircles] = useState([])
@@ -58,7 +58,7 @@ export default function Network({ owner, repo }) {
               (d[4] - d[3] + 1) * rad * 4,
               rad,
               'url(#shinyGray)',
-              '#999999', // Lighter grey stroke for nodes
+              '#999999',
               4,
               d[5].map(p => map.get(p)),
               createComponents()
@@ -82,7 +82,7 @@ export default function Network({ owner, repo }) {
   if (error) return <div>{error}</div>
 
   return (
-    <div className={"background"}>
+    <div className="background">
       <svg
         ref={svgRef}
         width="100%"
@@ -90,6 +90,12 @@ export default function Network({ owner, repo }) {
         style={{ touchAction: 'none' }}
         className="graph-container"
       >
+        <defs>
+          <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="75%" stopColor="lightpink" />
+            <stop offset="100%" stopColor="white" />
+          </linearGradient>
+        </defs>
         <g ref={gRef}>
           {circles.map(c => (
             <g key={`${c.id}-leaf`}>
@@ -102,6 +108,7 @@ export default function Network({ owner, repo }) {
                   x: c.cx + c.branchComponents[0] * 2.5,
                   y: c.cy + c.branchComponents[1] * 2.5,
                 }}
+                type="node"
               />
             </g>
           ))}
@@ -112,8 +119,8 @@ export default function Network({ owner, repo }) {
                 y1={c.cy + c.branchComponents[1]}
                 x2={c.cx + c.branchComponents[0] * 1.3}
                 y2={c.cy + c.branchComponents[1] * 1.3}
-                stroke="rgba(255, 255, 255, 0.12)"
-                strokeWidth={2}
+                stroke="rgba(255, 255, 255, 0.2)"
+                strokeWidth={4}
               />
             </g>
           ))}
@@ -128,42 +135,50 @@ export default function Network({ owner, repo }) {
                   y1={s.cy}
                   x2={t.cx}
                   y2={t.cy}
-                  stroke="rgba(255, 255, 255, 0.12)"
+                  stroke="rgba(255, 255, 255, 0.2)"
                   strokeWidth={2}
                 />
               )
             })
           )}
           {circles.map(c => (
-            <g key={`group-${c.id}`}>
+            <g
+              key={`node-${c.id}`}
+              className="node"
+            >
               <circle
+                className="node-circle"
                 cx={c.cx}
                 cy={c.cy}
                 r={c.rad}
                 fill="black"
-                stroke="rgba(255, 255, 255, 0.12)"
-                strokeWidth={2}
+                stroke="rgba(255, 255, 255, 0.2)"
+                strokeWidth={4}
+                onClick={() => handleClick(c.sha)}
+                style={{ cursor: 'pointer' }}
               />
-              <circle cx={c.cx} cy={c.cy} r={c.rad} fill="black" />
+              <circle
+                className="node-circle"
+                cx={c.cx}
+                cy={c.cy}
+                r={c.rad}
+                fill="black"
+                style={{ pointerEvents: 'none' }}
+              />
+              <text
+                x={c.cx}
+                y={c.cy}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill="rgba(255, 255, 255, 0.6)"
+                fontSize="12px"
+                tabIndex="0"
+                role="button"
+                aria-label={`Commit ${c.message}`}
+              >
+                {c.message}
+              </text>
             </g>
-          ))}
-          {circles.map(c => (
-            <text
-              key={`text-${c.id}`}
-              x={c.cx}
-              y={c.cy}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill="rgba(255, 255, 255, 0.6)"
-              fontSize="12px"
-              style={{ cursor: 'pointer', border: 'none' }}
-              onClick={() => handleClick(c.sha)}
-              tabIndex="0"
-              role="button"
-              aria-label={`Commit ${c.message}`}
-            >
-              {c.message}
-            </text>
           ))}
         </g>
       </svg>

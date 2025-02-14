@@ -1,16 +1,17 @@
 .searchbars-container-1 {
     display: flex;
     justify-content: center;
+    margin-top:50px;
 }
 
 .container-1 {
     justify-content: center;
     padding-bottom: 50px;
-    background:transparent;
+    background: transparent;
     position: absolute;
     width: 100%;
     z-index: 2;
-    padding-top:50px;
+    padding-top: 50px;
 }
 
 .searchbars-container-1 > h3 {
@@ -25,30 +26,38 @@
     height: 30px;
     margin-right: 10px;
     font-size: 125%;
-    border-radius: 5px;
-    border:none;
+    border-radius: 17px;
+    border: none;
     padding: 5px;
     background-color: rgb(31, 31, 31);
     transition: box-shadow 0.3s ease, background 0.3s ease;
-    caret-color:white;
+    caret-color: white;
 }
 
 .searchbars-container-1 > input:focus {
-  outline: none;
+    outline: none;
 }
 
-.searchbars-container-1 > input:-webkit-autofill {
-  background-color: rgb(31, 31, 31) !important;
-  color: white !important;
+.searchbars-container-1 > input:-webkit-autofill,
+.searchbars-container-1 > input:-webkit-autofill:hover,
+.searchbars-container-1 > input:-webkit-autofill:focus {
+    background-color: rgb(31, 31, 31) !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 0 0px 1000px rgb(31, 31, 31) inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
 }
-
 
 .unstyled-clear-1 {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 125%;
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    color: rgba(255, 255, 255, 0.6);
     font-family: 'Futura', serif;
     cursor: pointer;
     transition: color 0.3s ease;
+}
+
+.unstyled-clear-1:hover  {
+  background-color: rgb(31, 31, 31) !important;
+    cursor: pointer;
 }

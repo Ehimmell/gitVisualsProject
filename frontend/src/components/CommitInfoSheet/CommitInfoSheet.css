@@ -8,7 +8,7 @@
 
     border:1px solid rgba(255, 255, 255, 0.12);
 
-  border-radius:10px;
+  border-radius:18px;
 
     background-color:black;
 
@@ -65,11 +65,23 @@
 
 .top-stat {
   margin-bottom:5px;
+  background: linear-gradient(to bottom, rgb(160, 228, 192) 0%, rgb(216, 223, 206) 100%);
+  width: fit-content;
+  padding-left:5px;
+    padding-right:5px;
+  border-radius: 18px;
+  color:black;
 }
 
 .bottom-stat {
   margin-top:0;
   margin-bottom:0;
+  width: fit-content;
+  padding-left:5px;
+    padding-right:5px;
+  border-radius: 18px;
+  color:black;
+  background: linear-gradient(to right, lightpink 40%, white 100%);
 }
 
 .x {
@@ -84,4 +96,23 @@
 
 .x:hover {
   cursor:pointer;
+}
+
+.x {
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Futura', serif;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  margin-top:15px;
+  padding-top:3px;
+    padding-bottom:3px;
+  font-size: 100%;
+}
+
+.x:hover  {
+  background-color: rgb(31, 31, 31) !important;
+    cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import './Leaf.css';
 
-const Leaf = ({ start, end }) => {
+const Leaf = ({ start, end, type }) => {
   const dx = end.x - start.x;
   const dy = end.y - start.y;
   const L = Math.sqrt(dx * dx + dy * dy);
@@ -13,10 +13,10 @@ const Leaf = ({ start, end }) => {
     Z
   `;
 
-  // A random green value that you might use elsewhere (if needed)
-  const randomGreen = useMemo(() => {
-    return Math.floor(Math.random() * (40 - 10 + 1)) + 10;
-  }, []);
+    const leafFill = () => {
+        if (type === 'node') return "url(#leafGradient)";
+        if (type === 'page') return 'url(#pageGradient)';
+    }
 
   return (
     <svg
@@ -30,19 +30,22 @@ const Leaf = ({ start, end }) => {
         overflow: 'visible',
       }}
     >
-      <defs>
-        <linearGradient id="leafGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="rgb(160, 228, 192)" />
-          <stop offset="100%" stopColor="rgb(216, 223, 206)" />
-        </linearGradient>
-      </defs>
-      <g transform={`translate(${start.x}, ${start.y}) rotate(${angle})`}>
-        <path
-          d={pathData}
-          className="Leaf__shape"
-          fill="url(#leafGradient)"
-          // Updated stroke color to a softer, lighter green
-          stroke="rgba(140, 190, 160, 0.8)"
+        <defs>
+            <linearGradient id="leafGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="rgb(160, 228, 192)"/>
+                <stop offset="100%" stopColor="rgb(216, 223, 206)"/>
+            </linearGradient>
+            <linearGradient id="pageGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="40%" stopColor="lightpink"/>
+                <stop offset="100%" stopColor="white"/>
+            </linearGradient>
+        </defs>
+        <g transform={`translate(${start.x}, ${start.y}) rotate(${angle})`}>
+            <path
+                d={pathData}
+                className="Leaf__shape"
+                fill={leafFill()}
+                stroke="rgba(140, 190, 160, 0.8)"
           strokeWidth="2"
         />
         <line
@@ -51,7 +54,6 @@ const Leaf = ({ start, end }) => {
           x2={L}
           y2="0"
           className="Leaf__vein"
-          // Updated stroke color for the vein with slightly higher opacity
           stroke="rgba(140, 190, 160, 0.9)"
           strokeWidth="2"
         />

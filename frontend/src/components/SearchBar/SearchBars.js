@@ -29,8 +29,7 @@ export default function SearchBars({ owner, setOwner, repo, setRepo, onKeyDown, 
                     className="unstyled-clear-1"
                     id="clear"
                     onClick={onClear}
-                >
-                    <u style={{color:'rgba(255, 255, 255, 0.6)'}}>Clear tree</u>
+                >Clear tree
                 </button>
             </div>
         </div>
