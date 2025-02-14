@@ -63,7 +63,7 @@ export default function CommitInfoSheet(props) {
   return (
       <div className="info-sheet-container" ref={containerRef}>
           <button onClick={onClick} className="x">
-              Close
+              	&#8592;
           </button>
           <p className="git">
               <em>

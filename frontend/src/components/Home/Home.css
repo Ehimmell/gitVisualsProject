@@ -1,0 +1,24 @@
+.container-1 {
+    justify-content:center;
+    margin-top:200px;
+    display:flex;
+    align-items:center;
+}
+
+.unstyled-clear-1-home {
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 29.5px;
+    height:53px;
+    width:70px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Futura', serif;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size:1.5rem;
+}
+
+.unstyled-clear-1-home:hover  {
+  background-color: rgb(31, 31, 31) !important;
+    cursor: pointer;
+}
