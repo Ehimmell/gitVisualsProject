@@ -1,7 +1,10 @@
 .container-1 {
-    justify-content:center;
     margin-top:200px;
+}
+
+.hook-container-1 {
     display:flex;
+    justify-content:center;
     align-items:center;
 }
 
@@ -10,15 +13,52 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 29.5px;
     height:53px;
-    width:70px;
     color: rgba(255, 255, 255, 0.6);
     font-family: 'Futura', serif;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-size:1.5rem;
+    font-size:1.25rem;
 }
 
 .unstyled-clear-1-home:hover  {
   background-color: rgb(31, 31, 31) !important;
     cursor: pointer;
+}
+
+.feature-thumbnail-container {
+    display:flex;
+    margin-top:380px;
+    color: white;
+    font-size:1.25em;
+}
+
+.feature-thumbnail-container > div {
+    margin-left: 20px;
+    display:block;
+}
+
+.search-thumbnail-container {
+  padding: 50px 100px;
+  height: 256px;
+  width: 256px;
+  border-radius: 20px;
+  background:
+      radial-gradient(ellipse 240px 240px at 20% 30%, rgba(160,228,192,0.8), rgba(216,223,206,0.8) 80%, transparent 100%),
+      radial-gradient(ellipse 200px 200px at 70% 20%, rgba(160,228,192,0.7), rgba(216,223,206,0.7) 70%, transparent 100%),
+      radial-gradient(ellipse 120px 120px at 80% 80%, rgba(160,228,192,0.6), rgba(216,223,206,0.6) 70%, transparent 100%),
+      lightgrey;
+  background-repeat: no-repeat;
+}
+
+.docs-thumbnail-container {
+  padding: 50px 100px;
+  height: 256px;
+  width: 256px;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse 160px 160px at 80% 10%, rgba(255,255,0,0.8), rgba(255,255,0,0.5) 80%, transparent 100%),
+    radial-gradient(ellipse 100px 100px at 10% 20%, rgba(255,255,0,0.7), rgba(255,255,0,0.4) 70%, transparent 100%),
+    radial-gradient(ellipse 120px 120px at 40% 80%, rgba(255,255,0,0.6), rgba(255,255,0,0.3) 70%, transparent 100%),
+    rgba(125,249,255,0.8);
+  background-repeat: no-repeat;
 }
