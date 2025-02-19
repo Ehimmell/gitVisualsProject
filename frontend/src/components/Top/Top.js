@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Top.css';
 
 export default function Top({ handlePage }) {
-  const [page, setPage] = useState('home');
 
   const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
-
-  useEffect(() => {
     if(handlePage) {
-        handlePage(page);
+      handlePage(newPage);
     }
-  }, [page, handlePage]);
+  };
 
   return (
     <div>

@@ -37,6 +37,10 @@
     display:block;
 }
 
+.feature-thumbnail-container > div:hover {
+    cursor: pointer;
+}
+
 .search-thumbnail-container {
   padding: 50px 100px;
   height: 256px;
