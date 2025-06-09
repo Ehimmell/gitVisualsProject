@@ -8,6 +8,7 @@
       },
       {
         "Header" : "Test 2",
+        "Body" : "Test Grid",
         "Grid" : [
           "Test 5",
           "Test 6"
@@ -16,7 +17,7 @@
     ]
   },
   {
-    "Title" : "Navigating a commit log",
+    "Title" : "Commit logs",
     "Description" : "This guide will go over every feature found in a tree node commit log, and how to find it."
   },
   {
