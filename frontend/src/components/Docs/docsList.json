@@ -4,14 +4,19 @@
     "Description" : "This guide will detail how to search for and navigate tree graphs of your repositories.",
     "Sections" : [
       {
-        "Header" : "Test 1"
+        "Header" : "Using Search",
+        "Body" : ""
       },
       {
         "Header" : "Test 2",
         "Body" : "Test Grid",
+        "GridColumns" : [
+          "Test 1",
+          "Test 2"
+        ],
         "Grid" : [
-          "Test 5",
-          "Test 6"
+          ["1", "2"],
+          ["3", "4"]
         ]
       }
     ]

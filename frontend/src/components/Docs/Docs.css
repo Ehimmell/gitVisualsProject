@@ -1,4 +1,8 @@
 .solo-doc-body {
+    color:rgba(255, 255, 255, 0.6);
+}
+
+.solo-doc-header {
     color:#fff;
 }
 
@@ -7,12 +11,34 @@
     top:150px;
     padding: 5px 10px 5px 30px;
     width: 100px;
-    border-right: 2px solid white;
 }
 
 .open-doc-container {
     position:absolute;
-    width:500px;
-    top:150px;
-    margin-left:400px;
+    width:900px;
+    top:200px;
+    margin-left:300px;
+    padding:20px;
+    border-radius:20px;
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+.open-doc-container > p {
+    margin-left:20px;
+}
+
+
+.docs-container > p:hover {
+    cursor:pointer;
+}
+
+.table {
+    border-collapse:collapse;
+    width:100%;
+}
+
+.table,
+.table td {
+  border: 1px solid #fff;
+  padding: 4px 8px;
 }
