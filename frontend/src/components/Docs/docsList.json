@@ -4,19 +4,20 @@
     "Description" : "This guide will detail how to search for and navigate tree graphs of your repositories.",
     "Sections" : [
       {
-        "Header" : "Using Search",
-        "Body" : ""
+        "Header" : "Searching your Repository",
+        "Body" : "To find your Repo, enter your username for \"Owner\" and your repository name for \"Repo\" exactly as they appear on GitHub. Now search and your repository map should appear shortly."
       },
       {
-        "Header" : "Test 2",
-        "Body" : "Test Grid",
+        "Header" : "Map Legend",
+        "Body" : "The Repo Map displays",
         "GridColumns" : [
-          "Test 1",
-          "Test 2"
+          "Structure",
+          "Meaning"
         ],
         "Grid" : [
-          ["1", "2"],
-          ["3", "4"]
+          ["Node", "An individual commit"],
+          ["Row of Nodes", "A branch"],
+          ["Edge", "Commit leading from the left node to the right. If an edges crosses rows, it is a merge from the branch with the right node into the branch with the left."]
         ]
       }
     ]

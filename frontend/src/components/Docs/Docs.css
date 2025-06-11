@@ -22,8 +22,8 @@
     border-radius:20px;
     background-color:rgba(255, 255, 255, 0.2);
 }
-
-.open-doc-container > p {
+.open-doc-container > p,
+.open-doc-container > * > p {
     margin-left:20px;
 }
 
